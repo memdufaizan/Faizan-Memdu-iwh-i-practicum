@@ -1,0 +1,16 @@
+doctype html
+html 
+    head 
+        title= `${title}`
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body    
+        h1= "Create Pets"
+        form(action="/update-cobj" method="POST" class="form-wrapper")
+            p Pet Name:
+            input(type="text" name="name" placeholder="Enter Pet Name")
+            p Pet Type:
+            input(type="text" name="pet_type" placeholder="Enter Pet Type. e.g: Cat, Dog, Fish")
+            p Pet Owner:
+            input(type="text" name="pet_owner" placeholder="Enter Pet Owner Name")
+            input(type="submit")
