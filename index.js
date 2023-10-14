@@ -15,7 +15,7 @@ const PRIVATE_APP_ACCESS = process.env.PRIVATE_APP_ACCESS_TOKEN;
 
 // * Code for Route 1 goes here
 app.get('/', async (req, res) => {
-    const pets = 'https://api.hubspot.com/crm/v3/objects/pets';
+    const pets = 'https://api.hubspot.com/crm/v3/objects/pets?properties=name&properties=pet_type&properties=pet_owner';
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
@@ -23,6 +23,7 @@ app.get('/', async (req, res) => {
     try {
         const resp = await axios.get(pets, { headers });
         const data = resp.data.results;
+        //res.json(data);
         res.render('pets', { title: 'Pets | HubSpot APIs', data });
     } catch (error) {
         console.error(error);

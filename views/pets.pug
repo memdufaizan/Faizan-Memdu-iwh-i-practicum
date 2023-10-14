@@ -9,5 +9,6 @@ html
         .cards 
             each pets in data
                 .card 
-                    h2.card__name #{pets.properties.firstname}  #{pets.properties.lastname}
-                    p.card__email #{pets.properties.email}
+                    h3.card__name #{ 'Pet Name: ' + pets.properties.name }  
+                    p.card__pet_type #{ 'Pet Type: ' + pets.properties.pet_type }
+                    p.card__pet_owner #{ 'Pet Owner: ' + pets.properties.pet_owner }
