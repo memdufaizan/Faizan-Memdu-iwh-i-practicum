@@ -15,7 +15,7 @@ const PRIVATE_APP_ACCESS = process.env.PRIVATE_APP_ACCESS_TOKEN;
 
 // * Code for Route 1 goes here
 app.get('/', async (req, res) => {
-    const pets = 'https://api.hubspot.com/crm/v3/objects/pets?properties=name&properties=pet_type&properties=pet_owner';
+    const pets = 'https://api.hubspot.com/crm/v3/objects/pets?properties=name&properties=pet_type&properties=pet_owner&limit=20';
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
@@ -24,7 +24,7 @@ app.get('/', async (req, res) => {
         const resp = await axios.get(pets, { headers });
         const data = resp.data.results;
         //res.json(data);
-        res.render('pets', { title: 'Pets | HubSpot APIs', data });
+        res.render('homepage', { title: 'Custom Object - Pets | Integrating With HubSpot I Practicum', data });
     } catch (error) {
         console.error(error);
     }
@@ -34,12 +34,35 @@ app.get('/', async (req, res) => {
 
 // * Code for Route 2 goes here
 app.get('/update-cobj', async (req, res) => {
-    res.render('create-pets', { title: 'Create Pets | HubSpot APIs' });
+    res.render('updates', { title: 'Update Custom Object Form - Pets | Integrating With HubSpot I Practicum' });
 });
 
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
 // * Code for Route 3 goes here
+app.post('/update-cobj', async (req, res) => {
+    const create = {
+        properties: {
+            "name": req.body.name,
+            "pet_type": req.body.pet_type,
+            "pet_owner": req.body.pet_owner
+        }
+    }
+
+    const createPets = `https://api.hubapi.com/crm/v3/objects/pets`;
+    const headers = {
+        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
+        'Content-Type': 'application/json'
+    };
+
+    try { 
+        const resp =  await axios.post(createPets, create, { headers } );
+        res.redirect('/');
+    } catch(err) {
+        console.error(err);
+    }
+
+});
 
 /** 
 * * This is sample code to give you a reference for how you should structure your calls. 

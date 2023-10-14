@@ -57,3 +57,7 @@ input[type="submit"] {
     padding: .375rem 1rem;
     margin-top: 10px;
 }
+
+.link {
+    margin-left: 15px;
+}
